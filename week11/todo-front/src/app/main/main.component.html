@@ -1,0 +1,7 @@
+<div>
+  <div *ngFor="let c of task_lists" (click)="getTasks(c)">{{c.id}} - {{c.name}}</div>
+</div>
+
+<div>
+  <div *ngFor="let t of tasks">{{t.id}} - {{t.name}} - {{t.status}}</div>
+</div>
