@@ -10,7 +10,7 @@
       "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "sass"
         }
       },
       "architect": {
@@ -30,7 +30,11 @@
               "src/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js",  
+              "./node_modules/popper.js/dist/umd/popper.min.js",  
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {
@@ -87,7 +91,8 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [],
+            "scripts": [
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"

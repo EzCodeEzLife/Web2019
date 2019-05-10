@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ProviderService } from '../shared/services/provider.service';
-import { ITaskList } from '../shared/models/models';
+import { ITaskList } from '../shared/models';
 import { Location } from '@angular/common';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-task-lists',
   templateUrl: './task-lists.component.html',
-  styleUrls: ['./task-lists.component.scss']
+  styleUrls: ['./task-lists.component.sass']
 })
 export class TaskListsComponent implements OnInit {
 
@@ -14,20 +15,19 @@ export class TaskListsComponent implements OnInit {
 
   public taskListName: string = ""
 
-  public flag: boolean = false;
-
   constructor(
     private provider: ProviderService,
-    private location: Location
-  )
-    { }
+    private location: Location,
+    private auth: AuthService
+    ) { }
 
   ngOnInit() {
+    if(this.auth.isAuthenticated){
     this.provider.getTaskLists().then(res => {
       this.taskLists = res;
     })
   }
-
+  }
 
   navigateBack(){
     this.location.back()
@@ -40,5 +40,9 @@ export class TaskListsComponent implements OnInit {
     })
   }
   }
+
+  // sendId(id: number){
+  //   this.provider.sendMessage.emit(id+"")
+  // }
 
 }

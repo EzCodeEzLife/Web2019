@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ProviderService } from '../shared/services/provider.service';
-import { ITaskOne, ITaskMore, ITaskList } from '../shared/models/models';
+import { ITaskLong, ITaskShort, ITaskList } from '../shared/models';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-task-list-tasks',
   templateUrl: './task-list-tasks.component.html',
-  styleUrls: ['./task-list-tasks.component.scss']
+  styleUrls: ['./task-list-tasks.component.sass']
 })
 export class TaskListTasksComponent implements OnInit {
 
-
-  public tasks: ITaskOne[] = [];
+  public tasks: ITaskShort[] = [];
   public taskList: any = {};
 
   public id: number;
@@ -25,9 +25,11 @@ export class TaskListTasksComponent implements OnInit {
     private provider: ProviderService,
     private route: ActivatedRoute,
     private location: Location,
-  ) { }
+    private auth: AuthService
+    ) { }
 
   ngOnInit() {
+    if(this.auth.isAuthenticated){
     this.id = parseInt(this.route.snapshot.paramMap.get('id'))
     if(this.id){
       this.provider.getTaskListTasks(this.id).then(res => {
@@ -38,8 +40,8 @@ export class TaskListTasksComponent implements OnInit {
       })
     }
   }
+  }
 
-  
   navigateBack(){
     this.location.back()
   }

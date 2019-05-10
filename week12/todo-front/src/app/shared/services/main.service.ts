@@ -1,10 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import * as moment from 'moment';
 import {HttpClient, HttpParams} from '@angular/common/http';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class MainService {
 
   constructor(protected http: HttpClient) {

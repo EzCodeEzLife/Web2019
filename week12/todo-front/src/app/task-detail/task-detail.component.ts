@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ProviderService } from '../shared/services/provider.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-task-detail',
   templateUrl: './task-detail.component.html',
-  styleUrls: ['./task-detail.component.scss']
+  styleUrls: ['./task-detail.component.sass']
 })
 export class TaskDetailComponent implements OnInit {
-
 
   public id: number = 0;
 
@@ -19,9 +19,11 @@ export class TaskDetailComponent implements OnInit {
     private provider: ProviderService,
     private route: ActivatedRoute,
     private location: Location,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
+    if(this.auth.isAuthenticated){
     this.id = parseInt(this.route.snapshot.paramMap.get('id'))
 
     if(this.id){
@@ -29,6 +31,7 @@ export class TaskDetailComponent implements OnInit {
         this.task = res
       })
     }
+  }
   }
 
   navigateBack(){
